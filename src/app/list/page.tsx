@@ -1,5 +1,5 @@
 const ListPage = () => {
-  return <div>ListPage</div>;
+  return <div className="text-3xl">ListPage</div>;
 };
 
 export default ListPage;
