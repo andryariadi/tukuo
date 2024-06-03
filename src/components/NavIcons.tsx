@@ -15,7 +15,7 @@ const NavIcons = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   const handleProfile = () => {
     if (!isLoggedIn) {
