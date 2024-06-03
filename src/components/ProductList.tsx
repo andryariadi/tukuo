@@ -24,12 +24,12 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-n-7 py-3 px-4 rounded-md border border-n-1/10 text-n-1">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
         {/* Top */}
-        <div className="bg-teal-600 relative w-full h-[19rem] rounded-t-md">
+        <div className="relative w-full h-[19rem] rounded-t-md">
           <Image
             src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Product List"
@@ -47,12 +47,12 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-n-7 py-3 px-4 rounded-md border border-n-1/10 text-n-1">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
         {/* Top */}
-        <div className="bg-teal-600 relative w-full h-[19rem] rounded-t-md">
+        <div className="relative w-full h-[19rem] rounded-t-md">
           <Image
             src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Product List"
@@ -70,12 +70,12 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-n-7 py-3 px-4 rounded-md border border-n-1/10 text-n-1">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
         {/* Top */}
-        <div className="bg-teal-600 relative w-full h-[19rem] rounded-t-md">
+        <div className="relative w-full h-[19rem] rounded-t-md">
           <Image
             src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
             alt="Product List"
@@ -93,7 +93,7 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-n-7 py-3 px-4 rounded-md border border-n-1/10 text-n-1">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
     </div>
