@@ -1,5 +1,13 @@
 export const slides = [
   {
+    id: 0,
+    title: "International Shopping, Global Shipping",
+    description: "Online shopping is now without geographical limits!",
+    img: "globe",
+    url: "/",
+    bg: "bg-gradient-to-r from-yellow-50 to-pink-50",
+  },
+  {
     id: 1,
     title: "Summer Sale Collections",
     description: "Sale! Up to 50% off!",
