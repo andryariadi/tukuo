@@ -1,4 +1,4 @@
-const slides = [
+export const slides = [
   {
     id: 1,
     title: "Summer Sale Collections",
