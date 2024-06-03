@@ -32,6 +32,7 @@ const config: Config = {
           12: "#2E2A41",
           13: "#6C7275",
         },
+        logo: "#FF5A00",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

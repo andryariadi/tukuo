@@ -7,6 +7,7 @@ import { div } from "three/examples/jsm/nodes/Nodes.js";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import CartModal from "./CartModal";
 
 const NavIcons = () => {
   const router = useRouter();
@@ -24,17 +25,22 @@ const NavIcons = () => {
   };
 
   return (
-    <div className="bg-teal-500 relative flex items-center gap-4 xl:gap-6 text-n-4">
-      <PiUserCircleFill size={24} onClick={handleProfile} />
+    <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">
+      <PiUserCircleFill size={25} onClick={handleProfile} />
       {isProfileOpen && (
-        <div className="bg-amber-500 absolute z-20 top-10 left-0 p-4 rounded-md text-sm">
+        <div className="bg-n-7 backdrop-blur-md absolute z-20 top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
           <Link href="/">Profile</Link>
-          <p className="mt-2 cursor-pointer">Logout</p>
+          <p className="mt-2">Logout</p>
         </div>
       )}
 
-      <IoMdNotificationsOutline size={24} />
-      <BsCart3 size={24} />
+      <IoMdNotificationsOutline size={25} />
+
+      <div className="relative">
+        <BsCart3 size={25} onClick={() => setIsCartOpen(!isCartOpen)} />
+        <div className="bg-rose-500 absolute -top-3 -right-4 w-6 h-6 flex items-center justify-center rounded-full text-n-1 text-sm">1</div>
+      </div>
+      {isCartOpen && <CartModal />}
     </div>
   );
 };

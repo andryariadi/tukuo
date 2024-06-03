@@ -17,7 +17,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex items-center p-2 rounded-md flex-1 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-color-1">
+    <form onSubmit={handleSearch} className="bg-n-7 flex items-center p-2 rounded-md lg:w-full border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
       <input type="text" placeholder="Search.." name="name" className="w-full bg-transparent outline-none text-n-2" />
       <button className="cursor-pointer text-n-4">
         <IoSearchOutline size={24} />
