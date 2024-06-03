@@ -28,7 +28,7 @@ const NavIcons = () => {
     <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">
       <PiUserCircleFill size={25} onClick={handleProfile} />
       {isProfileOpen && (
-        <div className="bg-n-7 backdrop-blur-md absolute z-20 top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
+        <div className="bg-n-7 backdrop-blur-md absolute top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
           <Link href="/">Profile</Link>
           <p className="mt-2">Logout</p>
         </div>
