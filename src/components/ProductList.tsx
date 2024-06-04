@@ -24,7 +24,7 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
@@ -47,7 +47,7 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
@@ -70,7 +70,7 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
       <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
@@ -93,7 +93,7 @@ const ProductList = () => {
             <span className="font-semibold">$49</span>
           </div>
           <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-1 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
+          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
         </div>
       </Link>
     </div>

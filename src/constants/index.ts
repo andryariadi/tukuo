@@ -1,3 +1,5 @@
+import { url } from "inspector";
+
 export const slides = [
   {
     id: 0,
@@ -30,5 +32,24 @@ export const slides = [
     img: "https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800",
     url: "/",
     bg: "bg-gradient-to-r from-blue-50 to-yellow-50",
+  },
+];
+
+export const images = [
+  {
+    id: 1,
+    url: "https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 2,
+    url: "https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    id: 3,
+    url: "https://images.pexels.com/photos/8386361/pexels-photo-8386361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  },
+  {
+    id: 4,
+    url: "https://images.pexels.com/photos/8386359/pexels-photo-8386359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];
