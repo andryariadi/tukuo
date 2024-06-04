@@ -8,15 +8,17 @@ const ProductImages = () => {
   const [index, setIndex] = useState(0);
 
   return (
-    <div className="bg-violet-500">
+    <div>
       {/* Top */}
-      <div className="bg-rose-500 h-[500px] relative">
-        <Image src={images[index].url} alt="Product" fill sizes="50vw" className="object- rounded-md" />
+      <div className="bg-n-7 backdrop-blur-md h-[500px] w-full p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
+        <div className="h-full relative">
+          <Image src={images[index].url} alt="Product" fill sizes="50vw" className="object- rounded-md" />
+        </div>
       </div>
       {/* Bottom */}
-      <div className="bg-gray-500 flex gap-4">
+      <div className="bg-n-7 backdrop-blur-md flex gap-4 mt-3 p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
         {images.map((img, i) => (
-          <div key={img.id} onClick={() => setIndex(i)} className="w-1/4 h-32 relative gap-4 mt-5">
+          <div key={img.id} onClick={() => setIndex(i)} className="w-1/4 h-32 relative gap-4">
             <Image src={img.url} alt="Product" fill sizes="50vw" className="object- rounded-md" />
           </div>
         ))}

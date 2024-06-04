@@ -18,12 +18,12 @@ const Add = () => {
   };
 
   return (
-    <div className="bg-rose-500 font-sans flex flex-col gap-4">
+    <div className="bg-rse-500 font-sans flex flex-col gap-4">
       <h4 className="font-medium">Choose a size</h4>
 
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
-          <div className="w-32 bg-teal-500 py-2 px-4 rounded-3xl flex items-center justify-between">
+          <div className="bg-n-8 backdrop-blur-md w-32 py-2 px-4 rounded-3xl flex items-center justify-between text-n-3 border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
             <button className="text-xl" onClick={() => handleQuantity("dec")}>
               -
             </button>
@@ -37,7 +37,7 @@ const Add = () => {
           </div>
         </div>
 
-        <button className="w-max bg-black text-n-1 text-sm py-3 px-4 rounded-full border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Add to Cart</button>
+        <button className="w-max bg-n-8 text-n-3 text-sm py-3 px-4 rounded-full border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Add to Cart</button>
       </div>
     </div>
   );

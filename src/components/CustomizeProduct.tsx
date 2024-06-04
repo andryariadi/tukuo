@@ -1,6 +1,6 @@
 const CustomizeProduct = () => {
   return (
-    <div className="bg-amber-500 font-sans flex flex-col gap-6">
+    <div className="bg-ambr-500 font-sans flex flex-col gap-6">
       <h4 className="font-medium">Choose a color</h4>
       <ul className="flex items-center gap-3">
         <li className="relative w-8 h-8 rounded-full ring-1 ring-n-3 cursor-pointer bg-rose-500">
@@ -16,7 +16,7 @@ const CustomizeProduct = () => {
       <ul className="flex items-center gap-3">
         <li className="py-2 px-4 rounded-md ring-1 ring-logo text-logo text-sm cursor-pointer">Small</li>
         <li className="py-2 px-4 rounded-md ring-1 ring-logo text-n-2 bg-logo text-sm cursor-pointer">Medium</li>
-        <li className="py-2 px-4 rounded-md ring-1 ring-amber-600 bg-amber-600 text-n-2 text-sm cursor-not-allowed">Large</li>
+        <li className="py-2 px-4 rounded-md ring-1 ring-amber-900 bg-amber-900 text-n-2 text-sm cursor-not-allowed">Large</li>
       </ul>
     </div>
   );
