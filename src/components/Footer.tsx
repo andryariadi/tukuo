@@ -62,8 +62,8 @@ const Footer = () => {
           <h1 className="font-medium text-lg">SUBSCRIBE</h1>
           <p>Be the first to get the latest news about trends, promotions, and much more!</p>
           <div className="flex">
-            <input type="text" placeholder="Email address" className="p-4 w-3/4" />
-            <button className="w-1/4 bg-lama text-white">JOIN</button>
+            <input type="text" placeholder="Email address" className="bg-n-7 p-4 w-3/4 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" />
+            <button className="w-1/4 bg-logo text-white">JOIN</button>
           </div>
           <span className="font-semibold">Secure Payments</span>
           <div className="flex justify-between">
