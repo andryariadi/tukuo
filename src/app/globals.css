@@ -54,12 +54,13 @@ body::-webkit-scrollbar-thumb {
 .carousel {
   --sb-track-color: #0e0c15;
   --sb-thumb-color: #6baf8d;
-  --sb-size: 1px;
+  --sb-size: 5px;
 }
 
 .carousel::-webkit-scrollbar {
   /* display: none; */
   width: var(--sb-size);
+  height: var(--sb-size);
 }
 
 .carousel::-webkit-scrollbar-track {
