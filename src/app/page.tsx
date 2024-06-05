@@ -1,6 +1,8 @@
 import CategoryList from "@/components/CategoryList";
+import Loading from "@/components/Loading";
 import ProductList from "@/components/ProductList";
 import Slider from "@/components/Slider";
+import { Suspense } from "react";
 
 const HomePage = async () => {
   // const wixClient = useWixClient();
@@ -19,11 +21,15 @@ const HomePage = async () => {
       <Slider />
       <div className="mt-24 px-4 md:px-8 lg:px-16 xl:px-32">
         <h1 className="text-2xl font-sans">Featured Product</h1>
-        <ProductList categoryId={process.env.FEATURED_PRODUCTS_CATEGORY_ID!} limit={4} />
+        <Suspense fallback={<Loading />}>
+          <ProductList categoryId={process.env.FEATURED_PRODUCTS_CATEGORY_ID!} limit={4} />
+        </Suspense>
       </div>
       <div className="mt-24 px-10">
         <h1 className="px-4 text-2xl font-sans">Categories</h1>
-        <CategoryList />
+        <Suspense fallback={<Loading />}>
+          <CategoryList />
+        </Suspense>
       </div>
     </div>
   );

@@ -2,19 +2,18 @@ import { wixClientServer } from "@/libs/wixClientServer";
 import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
-import DOMPurify from "isomorphic-dompurify";
+// import DOMPurify from "isomorphic-dompurify";
 
 // type Props = {
 //   categoryId: string;
 //   limit?: number;
+//   searchParams?: any;
 // };
 
-const ProductList = async ({ categoryId, limit }: { categoryId: string; limit?: number }) => {
-  const wixClient = wixClientServer();
+const ProductList = async ({ categoryId, limit, searchParams }: { categoryId: string; limit?: number; searchParams?: any }) => {
+  const wixClient = await wixClientServer();
 
-  const data = await (
-    await wixClient
-  ).products
+  const data = await wixClient.products
     .queryProducts()
     .eq("collectionIds", categoryId)
     .limit(limit || 20)
@@ -38,7 +37,8 @@ const ProductList = async ({ categoryId, limit }: { categoryId: string; limit?: 
               <span className="font-medium">{product.name}</span>
               <span className="font-semibold">${product.price?.price}</span>
             </div>
-            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.additionalInfoSections?.find((section) => section.title === "shortDesc")?.description || "My Description") }} className="text-sm text-n-3"></p>
+            {/* <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.additionalInfoSections?.find((section) => section.title === "shortDesc")?.description || "My Description") }} className="text-sm text-n-3"></p> */}
+            <p className="text-sm text-n-3">{product.additionalInfoSections?.find((section) => section.title === "shortDesc")?.description || "My Description"}</p>
             <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
           </div>
         </Link>
