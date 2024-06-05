@@ -17,6 +17,7 @@ const ProductList = () => {
 
           <Image src="https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />
         </div>
+
         {/* Bottom */}
         <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
           <div className="w-full flex justify-between font-sans">

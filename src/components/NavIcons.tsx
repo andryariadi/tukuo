@@ -36,8 +36,8 @@ const NavIcons = () => {
 
       <IoMdNotificationsOutline size={25} />
 
-      <div className="relative">
-        <BsCart3 size={25} onClick={() => setIsCartOpen(!isCartOpen)} />
+      <div className="relative" onClick={() => setIsCartOpen(!isCartOpen)}>
+        <BsCart3 size={25} />
         <div className="bg-rose-500 absolute -top-3 -right-4 w-6 h-6 flex items-center justify-center rounded-full text-n-1 text-sm">1</div>
       </div>
       {isCartOpen && <CartModal />}
