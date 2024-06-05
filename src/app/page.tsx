@@ -1,22 +1,25 @@
-"use client";
-
 import CategoryList from "@/components/CategoryList";
 import ProductList from "@/components/ProductList";
 import Slider from "@/components/Slider";
-import { useWixClient } from "@/hooks/useWixClient";
-import { useEffect } from "react";
+import { wixClientServer } from "@/libs/wixClientServer";
 
-const HomePage = () => {
-  const wixClient = useWixClient();
+const HomePage = async () => {
+  // const wixClient = useWixClient();
 
-  useEffect(() => {
-    const getProduct = async () => {
-      const res = await wixClient.products.queryProducts().find();
-      console.log(res, "<----dihome");
-    };
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     const res = await wixClient.products.queryProducts().find();
+  //     console.log(res, "<----dihome");
+  //   };
 
-    getProduct();
-  }, [wixClient]);
+  //   getProduct();
+  // }, [wixClient]);
+
+  const wixClient = wixClientServer();
+
+  const res = await (await wixClient).products.queryProducts().find();
+
+  console.log(res, "<----dihome");
 
   return (
     <div className="pt-[4.75rem] lg:pt-[5rem] overflow-hidden">
