@@ -1,102 +1,48 @@
+import { wixClientServer } from "@/libs/wixClientServer";
+import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
 
-const ProductList = () => {
+// type Props = {
+//   categoryId: string;
+//   limit?: number;
+// };
+
+const ProductList = async ({ categoryId, limit }: { categoryId: string; limit?: number }) => {
+  const wixClient = wixClientServer();
+
+  const data = await (
+    await wixClient
+  ).products
+    .queryProducts()
+    .eq("collectionIds", categoryId)
+    .limit(limit || 20)
+    .find();
+
+  console.log(data.items[0], "<----diproductlist");
   return (
     <div className="flex justify-between flex-wrap gap-x-1 gap-y-5 md:gap-y-12 mt-12">
-      <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
-        {/* Top */}
-        <div className="relative w-full h-[19rem] rounded-t-md">
-          <Image
-            src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Product List"
-            fill
-            sizes="25vw"
-            className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300"
-          />
+      {data.items.map((product: products.Product) => (
+        <Link key={product._id} href={`/${product.slug}`} className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
+          {/* Top */}
+          <div className="relative w-full h-[19rem] rounded-t-md">
+            <Image src={product.media?.mainMedia?.image?.url || "/product.png"} alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300" />
 
-          <Image src="https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />
-        </div>
-
-        {/* Bottom */}
-        <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
-          <div className="w-full flex justify-between font-sans">
-            <span className="font-medium">Product Name</span>
-            <span className="font-semibold">$49</span>
+            {product.media?.items && <Image src={product.media?.items[1]?.image?.url || "/product.png"} alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />}
           </div>
-          <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
-        </div>
-      </Link>
-      <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
-        {/* Top */}
-        <div className="relative w-full h-[19rem] rounded-t-md">
-          <Image
-            src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Product List"
-            fill
-            sizes="25vw"
-            className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300"
-          />
 
-          <Image src="https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />
-        </div>
-        {/* Bottom */}
-        <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
-          <div className="w-full flex justify-between font-sans">
-            <span className="font-medium">Product Name</span>
-            <span className="font-semibold">$49</span>
+          {/* Bottom */}
+          <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
+            <div className="w-full flex justify-between font-sans">
+              <span className="font-medium">{product.name}</span>
+              <span className="font-semibold">${product.price?.price}</span>
+            </div>
+            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(product.additionalInfoSections?.find((section) => section.title === "shortDesc")?.description || "My Description") }} className="text-sm text-n-3"></p>
+            <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
           </div>
-          <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
-        </div>
-      </Link>
-      <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
-        {/* Top */}
-        <div className="relative w-full h-[19rem] rounded-t-md">
-          <Image
-            src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Product List"
-            fill
-            sizes="25vw"
-            className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300"
-          />
-
-          <Image src="https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />
-        </div>
-        {/* Bottom */}
-        <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
-          <div className="w-full flex justify-between font-sans">
-            <span className="font-medium">Product Name</span>
-            <span className="font-semibold">$49</span>
-          </div>
-          <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
-        </div>
-      </Link>
-      <Link href="/" className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
-        {/* Top */}
-        <div className="relative w-full h-[19rem] rounded-t-md">
-          <Image
-            src="https://images.pexels.com/photos/3913025/pexels-photo-3913025.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Product List"
-            fill
-            sizes="25vw"
-            className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300"
-          />
-
-          <Image src="https://images.pexels.com/photos/8386363/pexels-photo-8386363.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />
-        </div>
-        {/* Bottom */}
-        <div className="bg-tel-500 h-[10rem] flex flex-col items-start justify-between p-1">
-          <div className="w-full flex justify-between font-sans">
-            <span className="font-medium">Product Name</span>
-            <span className="font-semibold">$49</span>
-          </div>
-          <p className="text-sm text-n-3">My Description</p>
-          <button className="w-max bg-black py-3 px-4 rounded-md text-n-3 border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Checkout</button>
-        </div>
-      </Link>
+        </Link>
+      ))}
     </div>
   );
 };
