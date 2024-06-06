@@ -26,9 +26,9 @@ const ProductList = async ({ categoryId, limit, searchParams }: { categoryId: st
         <Link key={product._id} href={`/${product.slug}`} className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
           {/* Top */}
           <div className="relative w-full h-[19rem] rounded-t-md">
-            <Image src={product.media?.mainMedia?.image?.url || "/product.png"} alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300" />
+            <Image src={product.media?.mainMedia?.image?.url || "/product.png"} alt={product.name || "Product"} fill sizes="25vw" className="absolute object-cover rounded-t-md z-10 hover:opacity-0 transition-all duration-300" />
 
-            {product.media?.items && <Image src={product.media?.items[1]?.image?.url || "/product.png"} alt="Product List" fill sizes="25vw" className="absolute object-cover rounded-t-md" />}
+            {product.media?.items && <Image src={product.media?.items[1]?.image?.url || "/product.png"} alt={product.name || "Product"} fill sizes="25vw" className="absolute object-cover rounded-t-md" />}
           </div>
 
           {/* Bottom */}

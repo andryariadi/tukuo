@@ -4,22 +4,24 @@ import { images } from "@/constants";
 import Image from "next/image";
 import { useState } from "react";
 
-const ProductImages = () => {
+const ProductImages = ({ items }: { items: any }) => {
   const [index, setIndex] = useState(0);
+
+  console.log(items, "<----diproductimages");
 
   return (
     <div>
       {/* Top */}
-      <div className="bg-n-7 backdrop-blur-md h-[500px] w-full p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
+      <div className="bg-n-7 backdrop-blur-md h-[450px] w-full p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
         <div className="h-full relative">
-          <Image src={images[index].url} alt="Product" fill sizes="50vw" className="object- rounded-md" />
+          <Image src={items[index].image?.url} alt={items.name} fill sizes="50vw" className="object-cover rounded-md" />
         </div>
       </div>
       {/* Bottom */}
-      <div className="bg-n-7 backdrop-blur-md flex gap-4 mt-3 p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
-        {images.map((img, i) => (
-          <div key={img.id} onClick={() => setIndex(i)} className="w-1/4 h-32 relative gap-4">
-            <Image src={img.url} alt="Product" fill sizes="50vw" className="object- rounded-md" />
+      <div className="bg-n-7 backdrop-blur-md flex flex-wrap gap-3 justify-between mt-2 p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hover:border-logo">
+        {items.map((img: any, i: number) => (
+          <div key={img._id} onClick={() => setIndex(i)} className="h-32 w-[23%] relative">
+            <Image src={img.image?.url} alt={img.name} fill sizes="50vw" className="object-cover rounded-md" />
           </div>
         ))}
       </div>
