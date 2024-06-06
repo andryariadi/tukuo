@@ -19,7 +19,7 @@ const Add = () => {
 
   return (
     <div className="bg-rse-500 font-sans flex flex-col gap-4">
-      <h4 className="font-medium">Choose a size</h4>
+      <h4 className="font-medium">Choose a Quantity</h4>
 
       <div className="flex justify-between">
         <div className="flex items-center gap-4">

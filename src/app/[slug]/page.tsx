@@ -13,7 +13,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
 
   if (!product) return notFound();
 
-  console.log(product.variants, "<----disinglepage");
+  console.log(product.productOptions, "<----disinglepage");
 
   return (
     <div className="bg-sy-500 px-4 pt-[4.75rem] md:pt-[8rem] md:px-8 lg:px-16 xl:px-32 flex flex-col lg:flex-row gap-16">
@@ -33,7 +33,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
             <h3 className="text-xl text-n-3 line-through">${product.price?.price}</h3>
           </div>
         )}
-        <CustomizeProduct />
+        {product.variants && product.productOptions && <CustomizeProduct productId={product._id!} variants={product.variants} productOptions={product.productOptions} />}
         <Add />
         {/* Review */}
         {product.additionalInfoSections?.map((section: any) => (
