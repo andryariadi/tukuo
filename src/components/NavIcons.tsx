@@ -26,7 +26,7 @@ const NavIcons = () => {
 
   return (
     <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">
-      <PiUserCircleFill size={25} onClick={handleProfile} />
+      <PiUserCircleFill size={25} onClick={handleProfile} className="hover:text-logo transition-colors duration-500 ease-in-out" />
       {isProfileOpen && (
         <div className="bg-n-7 backdrop-blur-md absolute top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
           <Link href="/">Profile</Link>
@@ -34,10 +34,10 @@ const NavIcons = () => {
         </div>
       )}
 
-      <IoMdNotificationsOutline size={25} />
+      <IoMdNotificationsOutline size={25} className="hover:text-logo transition-colors duration-500 ease-in-out" />
 
       <div className="relative" onClick={() => setIsCartOpen(!isCartOpen)}>
-        <BsCart3 size={25} />
+        <BsCart3 size={25} className="hover:text-logo transition-colors duration-500 ease-in-out" />
         <div className="bg-rose-500 absolute -top-3 -right-4 w-6 h-6 flex items-center justify-center rounded-full text-n-1 text-sm">1</div>
       </div>
       {isCartOpen && <CartModal />}

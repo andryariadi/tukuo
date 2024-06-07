@@ -30,9 +30,9 @@ const CustomizeProduct = ({ productId, variants, productOptions }: CustomizeProp
   console.log(selectedOptions, "<----dicustomize2");
 
   return (
-    <div className="bg-amber-500 font-sans flex flex-col gap-6">
+    <div className="bg-ambr-500 font-sans flex flex-col gap-6">
       {productOptions.map((options) => (
-        <div key={options.name} className="bg-sky-500 flex flex-col gap-4">
+        <div key={options.name} className="bg-sy-500 flex flex-col gap-4">
           <h4 className="font-medium">Choose a {options.name}</h4>
           <ul className="flex items-center gap-3">
             {options.choices?.map((choice) => {
@@ -49,7 +49,12 @@ const CustomizeProduct = ({ productId, variants, productOptions }: CustomizeProp
                   {disabled && <div className="absolute w-10 h-[2px] bg-rose-500 rotate-45 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-not-allowed" />}
                 </li>
               ) : (
-                <li key={choice.description} onClick={clickHandler} className="py-2 px-4 rounded-md ring-1 ring-logo text-logo text-sm" style={{ cursor: disabled ? "not-allowed" : "pointer" }}>
+                <li
+                  key={choice.description}
+                  onClick={clickHandler}
+                  className="py-2 px-4 rounded-md ring-1 ring-logo text-logo text-sm"
+                  style={{ cursor: disabled ? "not-allowed" : "pointer", backgroundColor: selected ? "#FF5A00" : disabled ? "#FF7B33" : "black", color: selected || disabled ? "bisque" : "#FF5A00" }}
+                >
                   {choice.description}
                 </li>
               );

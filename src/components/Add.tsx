@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FaCartPlus } from "react-icons/fa6";
 
 const Add = () => {
   const [quantity, setQuantity] = useState(1);
@@ -37,7 +38,14 @@ const Add = () => {
           </div>
         </div>
 
-        <button className="w-max bg-n-8 text-n-3 text-sm py-3 px-4 rounded-full border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Add to Cart</button>
+        {/* <button className="w-max bg-n-8 text-n-3 text-sm py-3 px-4 rounded-full border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Add to Cart</button> */}
+
+        <button className="group flex items-center justify-start w-11 h-11 bg-n-8 hover:bg-logo rounded-full border-[1.5px] border-logo cursor-pointer relative overflow-hidden transition-all duration-150 shadow-lg hover:w-36 hover:rounded-lg active:translate-x-1 active:translate-y-1">
+          <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
+            <FaCartPlus size={20} className="text-logo group-hover:text-n-2" />
+          </div>
+          <div className="absolute right-3 transform translate-x-full opacity-0 text-logo group-hover:text-n-2 text-sm font-semibold transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">Add to Cart</div>
+        </button>
       </div>
     </div>
   );
