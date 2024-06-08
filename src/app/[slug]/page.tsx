@@ -9,11 +9,12 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
 
   const data = await wixClient.products.queryProducts().eq("slug", params.slug).find();
 
-  const product = data.items[0];
+  const product = data.items[0]; // karna isinya array of boject
 
   if (!product) return notFound();
 
-  console.log(product.productOptions, "<----disinglepage");
+  // console.log(product.productOptions, "<----disinglepage");
+  console.log(product, "<----disinglepage");
 
   return (
     <div className="bg-sy-500 px-4 pt-[4.75rem] md:pt-[8rem] md:px-8 lg:px-16 xl:px-32 flex flex-col lg:flex-row gap-16">
@@ -33,8 +34,11 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
             <h3 className="text-xl text-n-3 line-through">${product.price?.price}</h3>
           </div>
         )}
-        {product.variants && product.productOptions && <CustomizeProduct productId={product._id!} variants={product.variants} productOptions={product.productOptions} />}
-        <Add />
+        {product.variants && product.productOptions ? (
+          <CustomizeProduct productId={product._id!} variants={product.variants} productOptions={product.productOptions} />
+        ) : (
+          <Add productId={product._id!} variantId="00000000-0000-0000-0000-000000000000" stockNumber={product.stock?.quantity || 0} />
+        )}
         {/* Review */}
         {product.additionalInfoSections?.map((section: any) => (
           <div key={section.title} className="font-sans border-t-2 border-n-1/10 py-2">
