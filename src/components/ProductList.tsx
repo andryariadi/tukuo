@@ -13,31 +13,33 @@ type ProductListProps = {
 const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps) => {
   const wixClient = await wixClientServer();
 
-  const productQuery = wixClient.products
+  let productQuery = wixClient.products
     .queryProducts()
     .startsWith("name", searchParams?.name || "")
     .eq("collectionIds", categoryId)
     .hasSome("productType", searchParams?.type ? [searchParams.type] : ["physical", "digital"])
     .gt("priceData.price", searchParams?.min || 0)
     .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || 20);
-  // .find();
+    .limit(limit || 20)
+    .skip(searchParams?.page ? parseInt(searchParams.page) * (limit || 20) : 0);
 
   if (searchParams?.sort) {
     const [sortType, sortBy] = searchParams.sort.split(" ");
 
     if (sortType === "asc") {
-      productQuery.ascending(sortBy);
+      // productQuery.ascending(sortBy); //tidak bisa dgn cara ini
+      productQuery = productQuery.ascending(sortBy);
     }
     if (sortType === "desc") {
-      productQuery.descending(sortBy);
+      // productQuery.descending(sortBy); //tidak bisa dgn cara ini
+      productQuery = productQuery.descending(sortBy);
     }
   }
 
   const data = await productQuery.find();
 
   return (
-    <div className="flex justify-between flex-wrap gap-x-1 gap-y-5 md:gap-y-12 mt-12">
+    <div className="flex justify-center flex-wrap gap-x-4 gap-y-5 md:gap-y-12 mt-12">
       {data.items.map((product: products.Product) => (
         <Link key={product._id} href={`/${product.slug}`} className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hovr:border-logo">
           {/* Top */}

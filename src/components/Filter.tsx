@@ -10,10 +10,10 @@ const Filter = () => {
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams);
     params.set(name, value);
 
-    replace(`${pathName}?${params}`);
+    replace(`${pathName}?${params.toString()}`);
 
     console.log(name, value, params, "<----difilter1");
   };
@@ -65,9 +65,11 @@ const Filter = () => {
       {/* Right */}
       <div className="">
         <select name="sort" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" onChange={handleFilterChange}>
-          <option>Sort By</option>
-          <option value="asc price">Price (low to hight)</option>
-          <option value="desc price">Price (hight to low)</option>
+          <option value="" selected disabled>
+            Sort By
+          </option>
+          <option value="asc price">Price (low to high)</option>
+          <option value="desc price">Price (high to low)</option>
           <option value="asc lastUpdated">Newest</option>
           <option value="desc lastUpdated">Oldest</option>
         </select>
