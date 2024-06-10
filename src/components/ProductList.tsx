@@ -3,12 +3,15 @@ import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
 import { MdShoppingCartCheckout } from "react-icons/md";
+import Pagination from "./Pagination";
 
 type ProductListProps = {
   categoryId: string;
   limit?: number;
   searchParams?: any;
 };
+
+const PRODUCT_PER_PAGE = 1;
 
 const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps) => {
   const wixClient = await wixClientServer();
@@ -20,8 +23,8 @@ const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps
     .hasSome("productType", searchParams?.type ? [searchParams.type] : ["physical", "digital"])
     .gt("priceData.price", searchParams?.min || 0)
     .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || 20)
-    .skip(searchParams?.page ? parseInt(searchParams.page) * (limit || 20) : 0);
+    .limit(limit || PRODUCT_PER_PAGE)
+    .skip(searchParams?.page ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE) : 0);
 
   if (searchParams?.sort) {
     const [sortType, sortBy] = searchParams.sort.split(" ");
@@ -38,8 +41,10 @@ const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps
 
   const data = await productQuery.find();
 
+  console.log(data, "<----productlist");
+
   return (
-    <div className="flex justify-center flex-wrap gap-x-4 gap-y-5 md:gap-y-12 mt-12">
+    <div className="flex flex-col justify-center flex-wrap gap-x-4 gap-y-5 md:gap-y-12 mt-12">
       {data.items.map((product: products.Product) => (
         <Link key={product._id} href={`/${product.slug}`} className="bg-n-8 backdrop-blur-md w-full flex flex-col gap-4 md:w-[45%] lg:w-[24%] p-1 rounded-md border border-n-5 transition-colors duration-500 ease-in-out hovr:border-logo">
           {/* Top */}
@@ -66,6 +71,8 @@ const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps
           </div>
         </Link>
       ))}
+
+      <Pagination currentPage={data.currentPage || 0} hasPrev={data.hasPrev()} hasNext={data.hasNext()} />
     </div>
   );
 };
