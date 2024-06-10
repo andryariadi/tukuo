@@ -1,9 +1,30 @@
+"use client";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+
 const Filter = () => {
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(name, value);
+
+    replace(`${pathName}?${params}`);
+
+    console.log(name, value, params, "<----difilter1");
+  };
+
+  console.log(pathName, searchParams, replace, "<----difilter2");
+
   return (
     <div className="mt-12 flex flex-col md:flex-row justify-between gap-5 font-sans">
       <div className="flex gap-6 flex-wrap">
         {/* Left */}
-        <select name="type" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
+        <select name="type" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" onChange={handleFilterChange}>
           <option value="" selected disabled>
             Type
           </option>
@@ -11,25 +32,23 @@ const Filter = () => {
           <option value="digital">Digital</option>
         </select>
 
-        <input type="text" name="min" placeholder="Min Price" className="bg-n-7 backdrop-blur-md w-24 py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" />
+        <input
+          type="text"
+          name="min"
+          placeholder="Min Price"
+          className="bg-n-7 backdrop-blur-md w-24 py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo"
+          onChange={handleFilterChange}
+        />
 
-        <input type="text" name="max" placeholder="Max Price" className="bg-n-7 backdrop-blur-md w-24 py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" />
+        <input
+          type="text"
+          name="max"
+          placeholder="Max Price"
+          className="bg-n-7 backdrop-blur-md w-24 py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo"
+          onChange={handleFilterChange}
+        />
 
-        <select name="size" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
-          <option value="" selected disabled>
-            Size
-          </option>
-          <option value="">Size</option>
-        </select>
-
-        <select name="color" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
-          <option value="" selected disabled>
-            Color
-          </option>
-          <option value="">Color</option>
-        </select>
-
-        <select name="ribbon" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
+        <select name="cat" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" onChange={handleFilterChange}>
           <option value="" selected disabled>
             Category
           </option>
@@ -37,7 +56,7 @@ const Filter = () => {
           <option value="popular">Popular</option>
         </select>
 
-        <select name="" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
+        <select name="" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" onChange={handleFilterChange}>
           <option value="" selected disabled>
             All Filters
           </option>
@@ -45,14 +64,12 @@ const Filter = () => {
       </div>
       {/* Right */}
       <div className="">
-        <select name="" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo">
-          <option value="" selected disabled>
-            Sort By
-          </option>
-          <option value="">Price (low to hight)</option>
-          <option value="">Price (hight to low)</option>
-          <option value="">Newest</option>
-          <option value="">Oldest</option>
+        <select name="sort" id="" className="bg-n-7 backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs text-n-3 border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo" onChange={handleFilterChange}>
+          <option>Sort By</option>
+          <option value="asc price">Price (low to hight)</option>
+          <option value="desc price">Price (hight to low)</option>
+          <option value="asc lastUpdated">Newest</option>
+          <option value="desc lastUpdated">Oldest</option>
         </select>
       </div>
     </div>

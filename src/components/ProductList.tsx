@@ -4,14 +4,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdShoppingCartCheckout } from "react-icons/md";
 
-const ProductList = async ({ categoryId, limit, searchParams }) => {
+type ProductListProps = {
+  categoryId: string;
+  limit?: number;
+  searchParams?: any;
+};
+
+const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps) => {
   const wixClient = await wixClientServer();
 
-  const data = await wixClient.products
+  const productQuery = wixClient.products
     .queryProducts()
+    .startsWith("name", searchParams?.name || "")
     .eq("collectionIds", categoryId)
-    .limit(limit || 20)
-    .find();
+    .hasSome("productType", searchParams?.type ? [searchParams.type] : ["physical", "digital"])
+    .gt("priceData.price", searchParams?.min || 0)
+    .lt("priceData.price", searchParams?.max || 999999)
+    .limit(limit || 20);
+  // .find();
+
+  if (searchParams?.sort) {
+    const [sortType, sortBy] = searchParams.sort.split(" ");
+
+    if (sortType === "asc") {
+      productQuery.ascending(sortBy);
+    }
+    if (sortType === "desc") {
+      productQuery.descending(sortBy);
+    }
+  }
+
+  const data = await productQuery.find();
 
   return (
     <div className="flex justify-between flex-wrap gap-x-1 gap-y-5 md:gap-y-12 mt-12">

@@ -25,7 +25,7 @@ body {
 /* Body Scrollbar */
 body {
   --sb-track-color: #232e33;
-  --sb-thumb-color: #6baf8d;
+  --sb-thumb-color: #ff5a00;
   --sb-size: 5px;
 }
 
