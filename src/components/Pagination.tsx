@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, hasPrev, hasNext }: PaginationProps) => {
   };
 
   return (
-    <div className="bg-ros-500 flex gap-5">
+    <div className="flex gap-5">
       <button
         className="text-logo px-4 py-2 rounded-md border border-logo cursor-pointer disabled:bg-[#FF7B33] disabled:cursor-not-allowed hover:bg-logo hover:text-n-2 transition-all duration-300"
         disabled={!hasPrev}

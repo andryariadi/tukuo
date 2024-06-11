@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
+import { div } from "three/examples/jsm/nodes/Nodes.js";
 
 type PropsAdd = {
   productId: string;
@@ -37,12 +38,14 @@ const Add = ({ productId, variantId, stockNumber }: PropsAdd) => {
               +
             </button>
           </div>
-          <div className="text-xs">
-            Only <span className="text-orange-500">{stockNumber} items</span> left! <br /> {"Don't"} miss it
-          </div>
+          {stockNumber < 1 ? (
+            <div className="text-xs">Product is out of stock</div>
+          ) : (
+            <div className="text-xs">
+              Only <span className="text-orange-500">{stockNumber} items</span> left! <br /> {"Don't"} miss it
+            </div>
+          )}
         </div>
-
-        {/* <button className="w-max bg-n-8 text-n-3 text-sm py-3 px-4 rounded-full border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Add to Cart</button> */}
 
         <button className="group flex items-center justify-start w-11 h-11 bg-n-8 hover:bg-logo rounded-full border-[1.5px] border-logo cursor-pointer relative overflow-hidden transition-all duration-150 shadow-lg hover:w-36 hover:rounded-lg active:translate-x-1 active:translate-y-1">
           <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
