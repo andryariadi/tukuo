@@ -41,7 +41,8 @@ const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps
 
   const data = await productQuery.find();
 
-  console.log(data, "<----productlist");
+  // console.log(data, "<----productlist");
+  console.log(searchParams, "<----productlist");
 
   return (
     <>
@@ -74,7 +75,7 @@ const ProductList = async ({ categoryId, limit, searchParams }: ProductListProps
             </Link>
           ))}
         </div>
-        <Pagination currentPage={data.currentPage || 0} hasPrev={data.hasPrev()} hasNext={data.hasNext()} />
+        {searchParams?.cat ? <Pagination currentPage={data.currentPage || 0} hasPrev={data.hasPrev()} hasNext={data.hasNext()} /> : ""}
       </div>
     </>
   );

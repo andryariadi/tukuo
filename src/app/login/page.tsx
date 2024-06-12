@@ -7,6 +7,10 @@ import { useState } from "react";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
+import { CiMail } from "react-icons/ci";
+import { CiUser } from "react-icons/ci";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 enum MODE {
   LOGIN = "LOGIN",
@@ -21,7 +25,6 @@ const LoginPage = () => {
   const wixClient = useWixClient();
 
   const isLoggedIn = wixClient.auth.loggedIn();
-
   if (isLoggedIn) {
     router.push("/");
   }
@@ -29,6 +32,7 @@ const LoginPage = () => {
   console.log(isLoggedIn, "<----diloginpage");
 
   const [mode, setMode] = useState(MODE.LOGIN);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [inputUser, setInputUser] = useState({
     username: "",
@@ -150,28 +154,27 @@ const LoginPage = () => {
           {mode === MODE.REGISTER ? (
             <div className="flex flex-col gap-2">
               <label className="text-sm">Username</label>
-              <input
-                type="text"
-                name="username"
-                value={inputUser.username}
-                onChange={handleChangeInput}
-                placeholder="Username"
-                className="p-4 border border-n-1/10 rounded-lg bg-n-7 outline-none focus:ring-logo focus:border-logo placeholder:text-sm placeholder:text-n-4/60"
-              />
+              <div className="flex items-center rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
+                <input type="text" name="username" value={inputUser.username} onChange={handleChangeInput} placeholder="Username" className="p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs" />
+                <CiUser size={35} className="pe-3 text-n-4/60" />
+              </div>
             </div>
           ) : null}
 
           {mode !== MODE.EMAIL_VERIFICATION ? (
             <div className="flex flex-col gap-2">
               <label className="text-sm">E-mail</label>
-              <input
-                type="email"
-                name="email"
-                value={inputUser.email}
-                onChange={handleChangeInput}
-                placeholder="****@gmail.com"
-                className="p-4 border border-n-1/10 rounded-lg bg-n-7 outline-none focus:ring-logo focus:border-logo placeholder:text-sm placeholder:text-n-4/60"
-              />
+              <div className="flex items-center rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
+                <input
+                  type="email"
+                  name="email"
+                  value={inputUser.email}
+                  onChange={handleChangeInput}
+                  placeholder="****@gmail.com"
+                  className="p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs autofill:bg-n-7"
+                />
+                <CiMail size={35} className="pe-3 text-n-4/60" />
+              </div>
             </div>
           ) : (
             <div className="flex flex-col gap-2">
@@ -183,14 +186,19 @@ const LoginPage = () => {
           {mode === MODE.REGISTER || mode === MODE.LOGIN ? (
             <div className="flex flex-col gap-2">
               <label className="text-sm">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={inputUser.password}
-                onChange={handleChangeInput}
-                placeholder="Enter your password"
-                className="p-4 border border-n-1/10 rounded-lg bg-n-7 outline-none focus:ring-logo focus:border-logo placeholder:text-sm placeholder:text-n-4/60"
-              />
+              <div className="flex items-center rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
+                <input
+                  type={!showPassword ? "password" : "text"}
+                  name="password"
+                  value={inputUser.password}
+                  onChange={handleChangeInput}
+                  placeholder="Enter your password"
+                  className="p-4 rounded-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs"
+                />
+                <div className="" onClick={() => setShowPassword(!showPassword)}>
+                  {!showPassword ? <IoEyeOutline size={35} className="pe-3 text-n-4/60" /> : <IoEyeOffOutline size={35} className="pe-3 text-n-4/60" />}
+                </div>
+              </div>
             </div>
           ) : null}
 
