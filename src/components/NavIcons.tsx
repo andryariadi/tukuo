@@ -9,6 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import CartModal from "./CartModal";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
+import Loader from "./Loader";
 
 const NavIcons = () => {
   const router = useRouter();
@@ -65,7 +66,7 @@ const NavIcons = () => {
         <div className="bg-n-7 backdrop-blur-md absolute top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
           <Link href="/login">Profile</Link>
           <p className="mt-2" onClick={handleLogout}>
-            {isLoading ? "Logging out..." : "Logout"}
+            {isLoading ? <Loader /> : "Logout"}
           </p>
         </div>
       )}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import Loader from "@/components/Loader";
 
 enum MODE {
   LOGIN = "LOGIN",
@@ -75,6 +76,7 @@ const LoginPage = () => {
 
         case MODE.RESET_PASSWORD:
           response = await wixClient.auth.sendPasswordResetEmail(inputUser.email, window.location.href);
+          setMessage("Check your email to reset your password!");
           break;
 
         case MODE.EMAIL_VERIFICATION:
@@ -101,6 +103,22 @@ const LoginPage = () => {
           router.push("/");
           break;
 
+        case LoginState.FAILURE:
+          if (response.errorCode === "invalidEmail" || response.errorCode === "invalidPassword") {
+            setError("Invalid email or password!");
+          } else if (response.errorCode === "emailAlreadyExists") {
+            setError("Email already exists!");
+          } else if (response.errorCode === "resetPassword") {
+            setError("You need to reset your password!");
+          } else {
+            setError("Something went wrong. Please try again!");
+          }
+
+        case LoginState.EMAIL_VERIFICATION_REQUIRED:
+          setMode(MODE.EMAIL_VERIFICATION);
+
+        case LoginState.OWNER_APPROVAL_REQUIRED:
+          setMessage("Your account is pending approval");
         default:
           break;
       }
@@ -182,8 +200,8 @@ const LoginPage = () => {
             </div>
           )}
 
-          <button className="py-3 rounded-md bg-logo text-n-2" disabled={isLoading}>
-            {isLoading ? "Loading..." : buttonTitle}
+          <button className={`py-3 rounded-md bg-logo text-n-2 ${isLoading ? "bg-transparent border border-logo" : ""}`} disabled={isLoading}>
+            {isLoading ? <Loader /> : buttonTitle}
           </button>
 
           {error && <div className="text-rose-500">{error}</div>}
