@@ -3,26 +3,60 @@
 import { PiUserCircleFill } from "react-icons/pi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCart3 } from "react-icons/bs";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import CartModal from "./CartModal";
+import { useWixClient } from "@/hooks/useWixClient";
+import Cookies from "js-cookie";
 
 const NavIcons = () => {
   const router = useRouter();
+  const pathName = usePathname();
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const isLoggedIn = true;
+  const wixClient = useWixClient();
+
+  const isLoggedIn = wixClient.auth.loggedIn();
 
   const handleProfile = () => {
     if (!isLoggedIn) {
       router.push("/login");
+    } else {
+      setIsProfileOpen(!isProfileOpen);
     }
-    setIsProfileOpen(!isProfileOpen);
   };
+
+  const handleLogout = async () => {
+    setIsLoading(true);
+
+    try {
+      Cookies.remove("refreshToken");
+      const { logoutUrl } = await wixClient.auth.logout(window.location.href);
+      router.push(logoutUrl);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+      setIsProfileOpen(false);
+    }
+  };
+
+  // AUTH WITH WIX-MANAGE LOGIN
+  // const wixClient = useWixClient();
+
+  // const login = async () => {
+  //   const loginRequestData = wixClient.auth.generateOAuthData("http://localhost:3000");
+
+  //   localStorage.setItem("OAuthWix", JSON.stringify(loginRequestData));
+
+  //   const { authUrl } = await wixClient.auth.getAuthUrl(loginRequestData);
+
+  //   window.location.href = authUrl;
+  // };
 
   return (
     <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">
@@ -30,7 +64,9 @@ const NavIcons = () => {
       {isProfileOpen && (
         <div className="bg-n-7 backdrop-blur-md absolute top-10 left-0 p-4 rounded-md text-sm border border-n-1/10 transition-colors duration-500 ease-in-out hover:border-logo text-n-1">
           <Link href="/login">Profile</Link>
-          <p className="mt-2">Logout</p>
+          <p className="mt-2" onClick={handleLogout}>
+            {isLoading ? "Logging out..." : "Logout"}
+          </p>
         </div>
       )}
 
