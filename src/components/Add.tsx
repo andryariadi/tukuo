@@ -32,7 +32,9 @@ const Add = ({ productId, variantId, stockNumber }: PropsAdd) => {
           catalogReference: {
             appId: process.env.NEXT_PUBLIC_WIX_APP_ID,
             catalogItemId: productId,
+            ...(variantId && { options: { variantId } }),
           },
+          quantity: quantity,
         },
       ],
     });
