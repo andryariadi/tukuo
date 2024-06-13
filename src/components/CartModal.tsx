@@ -1,9 +1,23 @@
+import { useWixClient } from "@/hooks/useWixClient";
 import Image from "next/image";
+import { useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
 
 const CartModal = () => {
   const cartItem = true;
+
+  const wixClient = useWixClient();
+
+  useEffect(() => {
+    const getCart = async () => {
+      const response = await wixClient.currentCart.getCurrentCart();
+      // return response;
+
+      console.log(response, "<---dicartmodal");
+    };
+
+    getCart();
+  }, [wixClient]);
 
   return (
     <>
