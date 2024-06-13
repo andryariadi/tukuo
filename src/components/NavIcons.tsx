@@ -4,12 +4,13 @@ import { PiUserCircleFill } from "react-icons/pi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import CartModal from "./CartModal";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
 import Loader from "./Loader";
+import { useCartStore } from "@/hooks/useCartStore";
 
 const NavIcons = () => {
   const router = useRouter();
@@ -46,6 +47,12 @@ const NavIcons = () => {
     }
   };
 
+  const { cart, counter, getCart } = useCartStore();
+
+  useEffect(() => {
+    getCart(wixClient);
+  }, [wixClient, getCart]);
+
   // AUTH WITH WIX-MANAGE LOGIN
   // const wixClient = useWixClient();
 
@@ -75,7 +82,7 @@ const NavIcons = () => {
 
       <div className="relative" onClick={() => setIsCartOpen(!isCartOpen)}>
         <BsCart3 size={25} className="hover:text-logo transition-colors duration-500 ease-in-out" />
-        <div className="bg-rose-500 absolute -top-3 -right-4 w-6 h-6 flex items-center justify-center rounded-full text-n-1 text-sm">1</div>
+        <div className="bg-rose-500 absolute -top-3 -right-4 w-6 h-6 flex items-center justify-center rounded-full text-n-1 text-sm">{counter}</div>
       </div>
       {isCartOpen && <CartModal />}
     </div>

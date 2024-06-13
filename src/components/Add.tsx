@@ -1,5 +1,6 @@
 "use client";
 
+import { useCartStore } from "@/hooks/useCartStore";
 import { useWixClient } from "@/hooks/useWixClient";
 import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
@@ -25,20 +26,7 @@ const Add = ({ productId, variantId, stockNumber }: PropsAdd) => {
   };
 
   const wixClient = useWixClient();
-  const addItem = async () => {
-    const response = await wixClient.currentCart.addToCurrentCart({
-      lineItems: [
-        {
-          catalogReference: {
-            appId: process.env.NEXT_PUBLIC_WIX_APP_ID,
-            catalogItemId: productId,
-            ...(variantId && { options: { variantId } }),
-          },
-          quantity: quantity,
-        },
-      ],
-    });
-  };
+  const { addItem } = useCartStore();
 
   return (
     <div className="bg-rse-500 font-sans flex flex-col gap-4">
@@ -65,7 +53,7 @@ const Add = ({ productId, variantId, stockNumber }: PropsAdd) => {
         </div>
 
         <button
-          onClick={addItem}
+          onClick={() => addItem(wixClient, productId, variantId, quantity)}
           className="group flex items-center justify-start w-11 h-11 bg-n-8 hover:bg-logo rounded-full border-[1.5px] border-logo cursor-pointer relative overflow-hidden transition-all duration-150 shadow-lg hover:w-36 hover:rounded-lg active:translate-x-1 active:translate-y-1"
         >
           <div className="flex items-center justify-center w-full transition-all duration-300 group-hover:justify-start group-hover:px-3">
