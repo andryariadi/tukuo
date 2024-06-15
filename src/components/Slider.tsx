@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GlobeDemo } from "./ui/GridGlobe";
+import { TextRevealCard } from "./ui/Text-reveal-card";
 
 const Slider = () => {
   const [current, setCurrent] = useState(0);
@@ -22,15 +23,16 @@ const Slider = () => {
       {/* Item Sliders */}
       <div className="w-max h-full flex transition-all ease-in-out duration-1000" style={{ transform: `translateX(-${current * 100}vw)` }}>
         {slides.map((item) => (
-          <div key={item.id} className={`w-screen h-full flex flex-col lg:flex-row`}>
+          <div key={item.id} className={`w-screen h-full flex flex-col lg:flex-row items-center bg-sk-500`}>
             {/* Text Container */}
-            <div className="h-[40%] md:h-full lg:w-1/2 flex flex-col items-center justify-center gap-8 2xl:gap-12 text-center">
-              <h2 className="text-n-3 text-xl lg:text-2xl 2xl:text-[2.2rem]" style={{ lineHeight: "3rem" }}>
+            <div className="h-[40%] md:h-full lg:w-1/2 flex flex-col items-center justify-center text-center">
+              {/* <h2 className="text-n-3 text-xl lg:text-2xl 2xl:text-[2.2rem]" style={{ lineHeight: "3rem" }}>
                 {item.description}
               </h2>
               <h1 className="text-3xl md:text-[2rem] lg:text-[2.7rem] 2xl:text-[3.5rem]" style={{ lineHeight: "4.5rem" }}>
                 {item.title}
-              </h1>
+              </h1> */}
+              <TextRevealCard text={item.title} revealText={item.description} />
               <Link href={item.url}>
                 <button className="bg-black text-n-3 uppercase text-sm py-3 px-4 rounded-md border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Shop Now</button>
               </Link>

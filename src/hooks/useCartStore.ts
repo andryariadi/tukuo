@@ -25,6 +25,7 @@ export const useCartStore = create<CartState>((set) => ({
       });
     } catch (error) {
       console.log(error);
+      set((prev) => ({ ...prev, isLoading: false }));
     }
   },
   addItem: async (wixClient, productId, variantId, quantity) => {

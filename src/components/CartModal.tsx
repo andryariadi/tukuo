@@ -1,5 +1,6 @@
 import { useCartStore } from "@/hooks/useCartStore";
 import { useWixClient } from "@/hooks/useWixClient";
+import { currentCart } from "@wix/ecom";
 import { media } from "@wix/sdk";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -24,6 +25,30 @@ const CartModal = () => {
 
     setSubTotal(calculateSubTotal());
   }, [cart?.lineItems]);
+
+  const handleCheckOut = async () => {
+    try {
+      const checkout = await wixClient.currentCart.createCheckoutFromCurrentCart({
+        channelType: currentCart.ChannelType.WEB,
+      });
+
+      const { redirectSession } = await wixClient.redirects.createRedirectSession({
+        ecomCheckout: {
+          checkoutId: checkout.checkoutId,
+        },
+        callbacks: {
+          postFlowUrl: window.location.origin,
+          thankYouPageUrl: `${window.location.origin}/success`,
+        },
+      });
+
+      if (redirectSession?.fullUrl) {
+        window.location.href = redirectSession.fullUrl;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   console.log(cart, "<----dicartmodal");
 
@@ -70,7 +95,7 @@ const CartModal = () => {
               <p className="text-n-3 text-sm mt-2 mb-4"> Shipping and taxes calculated at checkout.</p>
               <div className="flex justify-between text-sm">
                 <button className="bg-transparent py-3 px-4 rounded-md border-[2.5px] border-n-8 text-n-1">View Cart</button>
-                <button className="bg-n-8 py-3 px-4 rounded-md border border-n-1/10 text-n-1 disabled:cursor-not-allowed disabled:opacity-75" disabled={isLoading}>
+                <button className="bg-n-8 py-3 px-4 rounded-md border border-n-1/10 text-n-1 disabled:cursor-not-allowed disabled:opacity-75" disabled={isLoading} onClick={handleCheckOut}>
                   Checkout
                 </button>
               </div>
