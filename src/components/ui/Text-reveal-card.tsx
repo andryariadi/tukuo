@@ -56,11 +56,11 @@ export const TextRevealCard = ({ text, revealText, children, className }: { text
       onTouchEnd={mouseLeaveHandler}
       onTouchMove={touchMoveHandler}
       ref={cardRef}
-      className={cn("bg-n-8 w-[45rem] rounded-lg px-8 relative overflow-hidden", className)}
+      className={cn("bg-n-8 w-full md:w-[45rem] lg:w-[35rem] xl:w-[45rem] rounded-lg px-8 relative overflow-hidden", className)}
     >
       {children}
 
-      <div className="relative h-80 flex items-center overflow-hidden">
+      <div className="relative h-48 flex items-center overflow-hidden">
         <motion.div
           style={{
             width: "100%",
@@ -81,9 +81,9 @@ export const TextRevealCard = ({ text, revealText, children, className }: { text
           <p
             style={{
               textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
-              lineHeight: "45px",
+              //   lineHeight: "45px",
             }}
-            className="text-base sm:text-[2rem] py-10 font-bold text-n-2 bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300"
+            className="text-base sm:text-[2rem] py-10 font-bold text-n-2 bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-300 leading-[3rem]"
           >
             {revealText}
           </p>
@@ -99,9 +99,7 @@ export const TextRevealCard = ({ text, revealText, children, className }: { text
         ></motion.div>
 
         <div className="overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,white,transparent)]">
-          <p className="text-base sm:text-[3rem] py-10 font-bold bg-clip-text text-transparent bg-n-3" style={{ lineHeight: "70px" }}>
-            {text}
-          </p>
+          <p className="text-2xl md:text-[3rem] lg:text-4xl xl:text-5xl py-10 font-bold bg-clip-text text-transparent bg-n-3 md:leading-[4rem] lg:leading-[3.5rem] xl:leading-[4.5rem]">{text}</p>
           <MemoizedStars />
         </div>
       </div>
