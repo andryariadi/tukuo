@@ -37,4 +37,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 <!-- aaaaa -->
 
+    {/* <h2 className="text-n-3 text-xl lg:text-2xl 2xl:text-[2.2rem]" style={{ lineHeight: "3rem" }}>
+                {item.description}
+              </h2>
+              <h1 className="text-3xl md:text-[2rem] lg:text-[2.7rem] 2xl:text-[3.5rem]" style={{ lineHeight: "4.5rem" }}>
+                {item.title}
+              </h1> */}
+
 <!-- aaaaa -->

@@ -26,12 +26,6 @@ const Slider = () => {
           <div key={item.id} className={`w-screen h-full flex flex-col lg:flex-row items-center bg-sy-500`}>
             {/* Text Container */}
             <div className="bg-ros-500 h-[40%] md:h-full w-full lg:w-1/2 flex flex-col items-center justify-center text-center">
-              {/* <h2 className="text-n-3 text-xl lg:text-2xl 2xl:text-[2.2rem]" style={{ lineHeight: "3rem" }}>
-                {item.description}
-              </h2>
-              <h1 className="text-3xl md:text-[2rem] lg:text-[2.7rem] 2xl:text-[3.5rem]" style={{ lineHeight: "4.5rem" }}>
-                {item.title}
-              </h1> */}
               <TextRevealCard text={item.title} revealText={item.description} />
               <Link href={item.url}>
                 <button className="bg-black text-n-3 uppercase text-sm py-3 px-4 rounded-md border border-n-4 transition-colors duration-500 ease-in-out hover:border-logo hover:text-logo">Shop Now</button>
