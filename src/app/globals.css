@@ -80,6 +80,34 @@ body::-webkit-scrollbar-thumb {
 }
 /* Category Scrollbar */
 
+/* Order Scrollbar */
+.order-scroll {
+  --sb-track-color: #232e33;
+  --sb-thumb-color: #ff5a00;
+  --sb-size: 5px;
+}
+
+.order-scroll::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.order-scroll::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 15px;
+}
+
+.order-scroll::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 15px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .order-scroll {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+/* order Scrollbar */
+
 /* Loading Page */
 .custom-loader {
   width: 50px;
