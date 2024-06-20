@@ -2,25 +2,35 @@
 
 import { wixClientServer } from "./wixClientServer";
 
+interface Contact {
+  firstName?: string;
+  lastName?: string;
+  phones?: string[];
+}
+
+interface Profile {
+  nickname?: string;
+}
+
 export const updateUser = async (formData: FormData) => {
   const wixClient = await wixClientServer();
 
-  const id = formData.get("id") as string;
-  const username = formData.get("username") as string;
-  const firstName = formData.get("firstName") as string;
-  const lastName = formData.get("lastName") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
+  const { id, username, firstName, lastName, email, phone } = Object.fromEntries(Array.from(formData.entries()).map(([key, value]) => [key, value as string]));
 
   try {
+    const contact: Contact = {};
+    if (firstName) contact["firstName"] = firstName;
+    if (lastName) contact["lastName"] = lastName;
+    if (phone) contact["phones"] = [phone];
+
+    const profile: Profile = {};
+    if (username) profile["nickname"] = username;
+
+    // Lakukan pembaruan anggota dengan data yang sudah disiapkan
     const response = await wixClient.members.updateMember(id, {
-      contact: {
-        firstName: firstName || undefined,
-        lastName: lastName || undefined,
-        phones: [phone] || undefined,
-      },
+      contact: contact,
       loginEmail: email || undefined,
-      profile: { nickname: username || undefined },
+      profile: profile,
     });
 
     console.log(response, "<----diactions");
