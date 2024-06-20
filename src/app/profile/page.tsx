@@ -1,4 +1,5 @@
 import UpdateButton from "@/components/UpdateButton";
+import { updateUser } from "@/libs/actions";
 import { wixClientServer } from "@/libs/wixClientServer";
 import { members } from "@wix/members";
 import Link from "next/link";
@@ -28,7 +29,9 @@ const ProfilePage = async () => {
       {/* User Information */}
       <div className="bg-violt-500 w-full lg:w-1/2">
         <h1 className="text-3xl font-semibold">Profile</h1>
-        <form action="" className="bg-ambr-500 w-full mt-10 grid md:grid-cols-2 gap-5 border border-n-1/10 p-5 rounded-md">
+        <form action={updateUser} className="bg-ambr-500 w-full mt-10 grid md:grid-cols-2 gap-5 border border-n-1/10 p-5 rounded-md">
+          <input type="text" name="id" value={user.member.contactId} hidden />
+
           <div className="w-full lg:max-w-[300px] flex flex-col gap-2 col-span-2 md:col-auto">
             <label className="text-sm">Username</label>
             <div className="flex items-center justify-between rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
@@ -42,7 +45,7 @@ const ProfilePage = async () => {
             <div className="flex items-center justify-between rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
               <input
                 type="text"
-                name="phoneNumber"
+                name="phone"
                 placeholder={(user.member.contact?.phones && user.member.contact?.phones[0]) || "Phone Number"}
                 className="w-full p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs"
               />
@@ -61,7 +64,7 @@ const ProfilePage = async () => {
           <div className="w-full lg:max-w-[300px] flex flex-col gap-2 col-span-2 md:col-auto">
             <label className="text-sm">Last Name</label>
             <div className="flex items-center justify-between rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
-              <input type="text" name="username" placeholder={user.member.contact?.lastName || "Lastname"} className="w-full p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs" />
+              <input type="text" name="lastName" placeholder={user.member.contact?.lastName || "Lastname"} className="w-full p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs" />
               <RiUserSharedLine size={33} className="pe-3 text-n-4/60 bg-tea-600" />
             </div>
           </div>
