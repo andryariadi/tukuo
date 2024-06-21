@@ -26,7 +26,6 @@ export const updateUser = async (formData: FormData) => {
     const profile: Profile = {};
     if (username) profile["nickname"] = username;
 
-    // Lakukan pembaruan anggota dengan data yang sudah disiapkan
     const response = await wixClient.members.updateMember(id, {
       contact: contact,
       loginEmail: email || undefined,

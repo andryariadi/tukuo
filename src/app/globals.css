@@ -108,6 +108,34 @@ body::-webkit-scrollbar-thumb {
 }
 /* order Scrollbar */
 
+/* Cart Scrollbar */
+.cart-scroll {
+  --sb-track-color: #232e33;
+  --sb-thumb-color: #ff5a00;
+  --sb-size: 5px;
+}
+
+.cart-scroll::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.cart-scroll::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 15px;
+}
+
+.cart-scroll::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 15px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .cart-scroll {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
+/* Carrt Scrollbar */
+
 /* Loading Page */
 .custom-loader {
   width: 50px;
