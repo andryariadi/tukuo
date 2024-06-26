@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 import Loader from "./Loader";
 import { useCartStore } from "@/hooks/useCartStore";
 import { AiOutlineLogout } from "react-icons/ai";
-import { CiUser } from "react-icons/ci";
 import { RiUserLine } from "react-icons/ri";
 
 const NavIcons = () => {
@@ -25,9 +24,10 @@ const NavIcons = () => {
   const wixClient = useWixClient();
 
   const isLoggedIn = wixClient.auth.loggedIn();
+  const isLoggedInOauth = wixClient.auth.parseFromUrl();
 
   const handleProfile = () => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !isLoggedInOauth) {
       router.push("/login");
     } else {
       setIsProfileOpen(!isProfileOpen);
@@ -55,18 +55,7 @@ const NavIcons = () => {
     getCart(wixClient);
   }, [wixClient, getCart]);
 
-  // AUTH WITH WIX-MANAGE LOGIN
-  // const wixClient = useWixClient();
-
-  // const login = async () => {
-  //   const loginRequestData = wixClient.auth.generateOAuthData("http://localhost:3000");
-
-  //   localStorage.setItem("OAuthWix", JSON.stringify(loginRequestData));
-
-  //   const { authUrl } = await wixClient.auth.getAuthUrl(loginRequestData);
-
-  //   window.location.href = authUrl;
-  // };
+  console.log(isLoggedIn, isLoggedInOauth, "<----dinavicons");
 
   return (
     <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">

@@ -11,6 +11,8 @@ import { CiMail } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
+import { GrGoogle } from "react-icons/gr";
+import { FaFacebook } from "react-icons/fa6";
 
 enum MODE {
   LOGIN = "LOGIN",
@@ -21,7 +23,6 @@ enum MODE {
 
 const LoginPage = () => {
   const router = useRouter();
-
   const wixClient = useWixClient();
 
   const isLoggedIn = wixClient.auth.loggedIn();
@@ -138,6 +139,18 @@ const LoginPage = () => {
 
   const buttonTitle = mode === MODE.LOGIN ? "Login" : mode === MODE.REGISTER ? "Register" : mode === MODE.RESET_PASSWORD ? "Reset" : "Verify";
 
+  // AUTH WITH WIX-MANAGE LOGIN
+
+  const loginOauth = async () => {
+    const loginRequestData = wixClient.auth.generateOAuthData("http://localhost:3000");
+
+    localStorage.setItem("OAuthWix", JSON.stringify(loginRequestData));
+
+    const { authUrl } = await wixClient.auth.getAuthUrl(loginRequestData);
+
+    window.location.href = authUrl;
+  };
+
   return (
     <div className="bg-tal-500 h-screen px-4 pt-[4.75rem] md:pt-[6rem] md:px-8 lg:px-32 xl:px-40 2xl:px-64 flex flex-col md:flex-row items-center justify-center">
       {/* Image Container */}
@@ -155,7 +168,14 @@ const LoginPage = () => {
             <div className="flex flex-col gap-2">
               <label className="text-sm">Username</label>
               <div className="flex items-center rounded-lg bg-n-7 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
-                <input type="text" name="username" value={inputUser.username} onChange={handleChangeInput} placeholder="Username" className="p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs" />
+                <input
+                  type="text"
+                  name="username"
+                  value={inputUser.username}
+                  onChange={handleChangeInput}
+                  placeholder="Username"
+                  className="w-full p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs"
+                />
                 <CiUser size={35} className="pe-3 text-n-4/60" />
               </div>
             </div>
@@ -171,7 +191,7 @@ const LoginPage = () => {
                   value={inputUser.email}
                   onChange={handleChangeInput}
                   placeholder="****@gmail.com"
-                  className="p-4 rounded-s-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs autofill:bg-n-7"
+                  className="w-full p-4 rounded-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs autofill:bg-n-7"
                 />
                 <CiMail size={35} className="pe-3 text-n-4/60" />
               </div>
@@ -193,11 +213,9 @@ const LoginPage = () => {
                   value={inputUser.password}
                   onChange={handleChangeInput}
                   placeholder="Enter your password"
-                  className="p-4 rounded-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs"
+                  className="w-full p-4 rounded-lg bg-n-7 outline-none  placeholder:text-sm placeholder:text-n-4/60 text-xs"
                 />
-                <div className="" onClick={() => setShowPassword(!showPassword)}>
-                  {!showPassword ? <IoEyeOutline size={35} className="pe-3 text-n-4/60" /> : <IoEyeOffOutline size={35} className="pe-3 text-n-4/60" />}
-                </div>
+                <div onClick={() => setShowPassword(!showPassword)}>{!showPassword ? <IoEyeOutline size={35} className="pe-3 text-n-4/60" /> : <IoEyeOffOutline size={35} className="pe-3 text-n-4/60" />}</div>
               </div>
             </div>
           ) : null}
@@ -211,6 +229,16 @@ const LoginPage = () => {
           <button className={`py-3 rounded-md bg-logo text-n-2 ${isLoading ? "bg-transparent border border-logo" : ""}`} disabled={isLoading}>
             {isLoading ? <Loader /> : buttonTitle}
           </button>
+
+          {mode === MODE.LOGIN && (
+            <div className="bg-ambr-600 flex flex-col gap-3 items-center text-xs">
+              <span>Or Sign in with</span>
+              <div className="flex gap-5" onClick={loginOauth}>
+                <GrGoogle size={23} className="cursor-pointer hover:text-logo transition-all duration-300" />
+                <FaFacebook size={23} className="cursor-pointer hover:text-logo transition-all duration-300r" />
+              </div>
+            </div>
+          )}
 
           {error && <div className="text-rose-500">{error}</div>}
 
