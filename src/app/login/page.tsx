@@ -26,6 +26,7 @@ const LoginPage = () => {
   const wixClient = useWixClient();
 
   const isLoggedIn = wixClient.auth.loggedIn();
+
   if (isLoggedIn) {
     router.push("/");
   }
@@ -231,9 +232,9 @@ const LoginPage = () => {
           </button>
 
           {mode === MODE.LOGIN && (
-            <div className="bg-ambr-600 flex flex-col gap-3 items-center text-xs">
+            <div className="bg-ambr-600 flex flex-col gap-3 items-center text-xs" onClick={loginOauth}>
               <span>Or Sign in with</span>
-              <div className="flex gap-5" onClick={loginOauth}>
+              <div className="flex gap-5">
                 <GrGoogle size={23} className="cursor-pointer hover:text-logo transition-all duration-300" />
                 <FaFacebook size={23} className="cursor-pointer hover:text-logo transition-all duration-300r" />
               </div>

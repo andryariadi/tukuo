@@ -24,25 +24,25 @@ const NavIcons = () => {
   const wixClient = useWixClient();
 
   const isLoggedIn = wixClient.auth.loggedIn();
-  const isLoggedInOauth = wixClient.auth.parseFromUrl();
+  // const isLoggedInOauth = wixClient.auth.parseFromUrl();
 
   const handleProfile = () => {
-    if (!isLoggedIn && !isLoggedInOauth) {
+    if (!isLoggedIn) {
       router.push("/login");
     } else {
-      setIsProfileOpen(!isProfileOpen);
+      setIsProfileOpen((prev) => !prev);
     }
   };
 
   const handleLogout = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
       Cookies.remove("refreshToken");
+
       const { logoutUrl } = await wixClient.auth.logout(window.location.href);
       router.push(logoutUrl);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
       setIsProfileOpen(false);
@@ -55,7 +55,7 @@ const NavIcons = () => {
     getCart(wixClient);
   }, [wixClient, getCart]);
 
-  console.log(isLoggedIn, isLoggedInOauth, "<----dinavicons");
+  console.log(isLoggedIn, "<----dinavicons");
 
   return (
     <div className="relative flex items-center gap-4 xl:gap-6 text-n-4 cursor-pointer">
