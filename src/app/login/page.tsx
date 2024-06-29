@@ -142,7 +142,7 @@ const LoginPage = () => {
 
   // AUTH WITH WIX-MANAGE LOGIN
   const loginOauth = async () => {
-    const loginRequestData = wixClient.auth.generateOAuthData("http://localhost:3000");
+    const loginRequestData = wixClient.auth.generateOAuthData("https://tukuo-andryariadi.vercel.app/");
 
     localStorage.setItem("OAuthWix", JSON.stringify(loginRequestData));
 
