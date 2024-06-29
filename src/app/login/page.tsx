@@ -141,7 +141,6 @@ const LoginPage = () => {
   const buttonTitle = mode === MODE.LOGIN ? "Login" : mode === MODE.REGISTER ? "Register" : mode === MODE.RESET_PASSWORD ? "Reset" : "Verify";
 
   // AUTH WITH WIX-MANAGE LOGIN
-
   const loginOauth = async () => {
     const loginRequestData = wixClient.auth.generateOAuthData("http://localhost:3000");
 

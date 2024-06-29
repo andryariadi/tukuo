@@ -30,7 +30,7 @@ const ProfilePage = async () => {
       <div className="bg-violt-500 w-full lg:w-1/2">
         <h1 className="text-3xl font-semibold">Profile</h1>
         <form action={updateUser} className="bg-ambr-500 w-full mt-10 grid md:grid-cols-2 gap-5 border border-n-1/10 p-5 rounded-md">
-          <input type="text" name="id" value={user.member.contactId} hidden />
+          {user.member?.contactId && <input type="text" name="id" value={user.member.contactId} hidden />}
 
           <div className="w-full lg:max-w-[300px] flex flex-col gap-2 col-span-2 md:col-auto">
             <label className="text-sm">Username</label>
